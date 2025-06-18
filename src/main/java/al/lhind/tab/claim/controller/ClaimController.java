@@ -3,6 +3,8 @@ package al.lhind.tab.claim.controller;
 import al.lhind.tab.claim.exception.CustomException;
 import al.lhind.tab.claim.model.ui.ClaimDto;
 import al.lhind.tab.claim.service.ClaimService;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/claims")
+@Slf4j
 public class ClaimController {
     private final ClaimService claimService;
 
@@ -30,8 +33,9 @@ public class ClaimController {
     }
 
     @PostMapping
-    public ResponseEntity<ClaimDto> createClaim(@Validated @RequestBody ClaimDto claimDto) {
-        claimDto = claimService.createClaim(claimDto);
+    public ResponseEntity<ClaimDto> createClaim(@Validated @RequestBody ClaimDto claimDto,  HttpServletRequest request) {
+        log.info("Inside createClaim with ip {}", request.getRemoteAddr());
+        claimDto = claimService.createClaim(claimDto, request.getRemoteAddr());
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(claimDto.getClaimId())

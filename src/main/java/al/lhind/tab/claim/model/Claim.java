@@ -5,9 +5,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+@Data
 @Entity
 @Table(name = "claims")
 public class Claim {
@@ -17,45 +20,6 @@ public class Claim {
     private ClaimStatus status;
     private String email;
     private String description;
-    private LocalDate createdDate;
-
-    public ClaimStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(ClaimStatus status) {
-        this.status = status;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public LocalDate getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(LocalDate createdDate) {
-        this.createdDate = createdDate;
-    }
+    private LocalDateTime createdDate;
+    private String ip;
 }
