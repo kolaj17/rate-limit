@@ -34,7 +34,7 @@ public class ClaimIpValidator {
                 return false;
             }
         } else {
-            cache.put(ip, new ArrayList<>(List.of(LocalDateTime.now())));
+            cache.put(ip, new ArrayList<>(List.of(now)));
         }
 
         return true;
